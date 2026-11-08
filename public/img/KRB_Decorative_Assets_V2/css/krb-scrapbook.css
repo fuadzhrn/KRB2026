@@ -1,0 +1,60 @@
+/* KRB Creative Scrapbook — UI accents
+   Put this file under resources/css/ or import in React entrypoint. */
+:root {
+  --krb-purple: #6611D7;
+  --krb-yellow: #F8D333;
+  --krb-paper: #FAF5F2;
+  --krb-ink: #17181D;
+}
+.krb-paper-bg {
+  background-color: var(--krb-paper);
+  background-image: url('../webp-optimized/paper-texture-cream.webp');
+  background-size: 540px 540px;
+}
+/* Natural photo remains a normal <img>: no forced cropping of faces. */
+.krb-polaroid {
+  --polaroid-angle: -2deg;
+  --polaroid-paper: #fffdf9;
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  padding: 9px 9px 24px;
+  background: var(--polaroid-paper);
+  box-shadow: 0 8px 22px rgba(22, 16, 38, .18), 0 1px 4px rgba(0,0,0,.12);
+  transform: rotate(var(--polaroid-angle));
+  transition: transform .2s ease, box-shadow .2s ease;
+  width: min(100%, 330px);
+}
+.krb-polaroid:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 13px 28px rgba(22, 16, 38, .22);
+}
+.krb-polaroid__photo {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+}
+.krb-polaroid__caption {
+  margin: 10px 6px 0;
+  color:var(--krb-ink);
+  font-size: 0.9rem;
+  font-weight:700;
+}
+.krb-torn-divider {
+  background-image: url('../webp-optimized/torn-paper-banner.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  min-height: 110px;
+}
+.krb-swatch-purple {
+  background: url('../webp-optimized/brush-purple-realistic.webp') center / 100% 100% no-repeat;
+}
+.krb-swatch-yellow {
+  background: url('../webp-optimized/brush-yellow-realistic.webp') center / 100% 100% no-repeat;
+}
+@media (prefers-reduced-motion: reduce) {
+  .krb-polaroid { transition:none; }
+}
