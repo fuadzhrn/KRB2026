@@ -3,7 +3,120 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* ------------------------------------------------------------------
+   KRB design tokens
+   Font variables (--krb-font-*) are emitted by @fonts (see vite.config.js).
+   ------------------------------------------------------------------ */
+:root {
+    --krb-primary: #6611d7;
+    --krb-yellow: #f8d333;
+    --krb-background: #faf5f2;
+    --krb-ink: #17181d;
+    --krb-lavender: #eee1f8;
+    --krb-deep-purple: #48188b;
+
+    /* Planned z-index scale */
+    --krb-z-base: 0;
+    --krb-z-decor: 10;
+    --krb-z-content: 20;
+    --krb-z-sticker: 30;
+    --krb-z-nav: 50;
+    --krb-z-overlay: 60;
+    --krb-z-skip: 100;
+}
+
+@theme inline {
+    --color-krb-primary: var(--krb-primary);
+    --color-krb-yellow: var(--krb-yellow);
+    --color-krb-background: var(--krb-background);
+    --color-krb-ink: var(--krb-ink);
+    --color-krb-lavender: var(--krb-lavender);
+    --color-krb-deep-purple: var(--krb-deep-purple);
+
+    --font-sans: var(--krb-font-body, 'Plus Jakarta Sans'), ui-sans-serif, system-ui, sans-serif;
+    --font-body: var(--krb-font-body, 'Plus Jakarta Sans'), ui-sans-serif, system-ui, sans-serif;
+    --font-display: var(--krb-font-display, 'Archivo Black'), 'Arial Black', Impact, sans-serif;
+    --font-hand: var(--krb-font-hand, 'Kalam'), cursive;
+}
+
+/* ------------------------------------------------------------------
+   Global base
+   ------------------------------------------------------------------ */
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-krb-background font-body text-krb-ink antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        background-color: var(--krb-yellow);
+        color: var(--krb-ink);
+    }
+
+    :focus-visible {
+        outline: 3px solid var(--krb-primary);
+        outline-offset: 3px;
+    }
+
+    img,
+    video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .font-hand {
+        font-weight: 700;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Shared utilities
+   ------------------------------------------------------------------ */
+@utility krb-paper-texture {
+    background-color: var(--krb-background);
+    background-image: url('/img/KRB_Decorative_Assets_V2/webp-optimized/paper-texture-cream.webp');
+    background-size: 540px 540px;
+}
+
+@layer components {
+    .krb-skip-link {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: var(--krb-z-skip);
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        background-color: var(--krb-ink);
+        color: var(--krb-background);
+        font-weight: 600;
+        transform: translateY(-200%);
+        transition: transform 0.15s ease;
+    }
+
+    .krb-skip-link:focus-visible {
+        transform: translateY(0);
+    }
+}
+
+/* ------------------------------------------------------------------
+   Reduced motion
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
