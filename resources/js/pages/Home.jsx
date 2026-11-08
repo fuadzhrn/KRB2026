@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import { Check } from 'lucide-react';
-import { decorative } from '../data/assets';
+import { krbAssets, krbAssetSizes } from '@/data/krbAssets';
 
 /**
  * Temporary foundation check page.
@@ -50,10 +50,10 @@ export default function Home() {
                 </ul>
 
                 <img
-                    src={decorative.brushYellow}
+                    src={krbAssets.decorative.brushes.yellow}
                     alt=""
-                    width="2172"
-                    height="724"
+                    width={krbAssetSizes.decorative.brushes.yellow.width}
+                    height={krbAssetSizes.decorative.brushes.yellow.height}
                     loading="lazy"
                     decoding="async"
                     className="mt-10 h-auto w-64 select-none"

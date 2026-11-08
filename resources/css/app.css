@@ -79,7 +79,8 @@
    ------------------------------------------------------------------ */
 @utility krb-paper-texture {
     background-color: var(--krb-background);
-    background-image: url('/img/KRB_Decorative_Assets_V2/webp-optimized/paper-texture-cream.webp');
+    /* Same file as krbAssets.textures.paperCream */
+    background-image: url('/assets/krb/textures/paper-cream.webp');
     background-size: 540px 540px;
 }
 
