@@ -8,6 +8,7 @@
 @import './components/home-videos.css';
 @import './components/home-crew.css';
 @import './components/footer.css';
+@import './components/members-hero.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';

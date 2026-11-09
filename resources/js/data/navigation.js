@@ -57,8 +57,10 @@ export const footerLinkGroups = [
         links: [
             { id: 'momen-favorit', label: 'Momen Favorit', href: '/#momen-favorit', route: 'home' },
             { id: 'video-archive', label: 'Video Archive', href: '/#video-archive', route: 'home' },
-            // Target: section #para-el on the Members page (not built yet).
-            { id: 'para-el', label: 'Para EL', href: '/members#para-el', route: 'members' },
+            // Target: section #para-el on the Members page. The page exists, but the
+            // section doesn't yet → `route: null` keeps it as "segera". Set it to
+            // 'members' once the #para-el section is built.
+            { id: 'para-el', label: 'Para EL', href: '/members#para-el', route: null },
         ],
     },
 ];

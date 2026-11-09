@@ -76,7 +76,7 @@ Semua foto berorientasi **portrait**. Untuk frame landscape, atur crop dengan `o
 
 ### 2.3 Members
 
-Belum ada foto anggota (EL). `krbAssets.photos.members` sengaja dibiarkan kosong.
+Foto anggota (EL) tersedia sejak paket Members V1 dan didaftarkan di `krbAssets.members` — lihat **bagian 9**.
 
 ---
 
@@ -213,4 +213,68 @@ Semua file pada tabel di atas, kolom "Sumber asli", plus:
 2. Sertakan `width`/`height` dari `krbAssetSizes` pada `<img>` untuk mencegah layout shift.
 3. Aset dekoratif: `alt=""` dan `aria-hidden="true"`. Foto: `alt` deskriptif dalam bahasa Indonesia santai.
 4. Foto di bawah lipatan layar: `loading="lazy" decoding="async"`. Foto Hero utama: `fetchpriority="high"`, tanpa lazy.
-5. Jika menambah aset baru: salin ke `public/assets/krb/<kategori>/` dengan nama kebab-case, tambahkan entri di `krbAssets.js` (dan `krbAssetSizes` untuk raster), lalu perbarui dokumen ini.
+5. Jika menambah aset baru: salin ke `public/assets/krb/<kategori>/` dengan nama kebab-case, tambahkan entri di `krbAssets.js` (dan `krbAssetSizes` untuk raster), lalu perbarui dokumen ini. Pengecualian: paket Members V1 dipakai langsung dari lokasi aslinya (bagian 9).
+
+---
+
+## 9. Members — paket aset V1 (`krbAssets.members`)
+
+- **Lokasi file:** `public/img/KRB_Members_Asset_Pack_V1/members/` (dipakai langsung dari lokasi aslinya, tidak disalin ke `public/assets/krb/` — menghindari duplikasi ~17 MB)
+- **URL publik:** `/img/KRB_Members_Asset_Pack_V1/members/...`
+- **Manifest kode:** `resources/js/data/krbAssets.js` → `krbAssets.members` (URL) dan `krbAssetSizes.members` (dimensi), di-key dengan id anggota
+- **Data profil:** `resources/js/data/members.js` → `members`, `heroMembers`, `rosterMembers`, `spotlightMembers`, `crewMomentPhotos`, `membersRadialBackground`, `getMemberById()`
+
+> ⚠️ `members-manifest.json` dan `krbMembersAssets.js` di dalam paket memakai path `/assets/krb/members/...` yang **tidak ada**. Keduanya disimpan sebagai arsip paket dan **tidak dipakai** oleh frontend; sumber kebenaran adalah `krbAssets.js` + `members.js`.
+
+### 9.1 Struktur
+
+```text
+public/img/KRB_Members_Asset_Pack_V1/
+├── README.md, members-manifest.json, krbMembersAssets.js   (arsip paket, tidak dipakai)
+└── members/
+    ├── posters-original/            15 poster asli (7 JPG, 8 PNG) — arsip, bukan pengganti cutout
+    ├── cutouts-draft/               15 cutout PNG transparan (draft, perlu review)
+    ├── hero-stickers-white-outline/ 6 stiker PNG transparan bertepi putih (Hero)
+    ├── backgrounds/                 el-retro-radial-burst.svg (1080×1350 viewBox)
+    └── reference/                   KRB-Members-Approved-Mockup.png (referensi desain, BUKAN aset web)
+```
+
+### 9.2 Pemakaian per section
+
+| Section | Data | Aset |
+|---|---|---|
+| Hero Members | `heroMembers` (urutan: El Pribumi, El Tuna, El Copad, El Turu, El Kritis, El Javo) | `photos.heroSticker` — stiker outline putih |
+| The EL Roster | `rosterMembers` (15) | `photos.cutout` + `membersRadialBackground` |
+| EL Spotlight (slider) | `spotlightMembers` (15) | `photos.cutout` |
+| Same Crew, Different Moments | `crewMomentPhotos` (5) | foto natural Home yang sudah ada (`krbAssets.photos.moments`) — tidak ada salinan baru |
+
+Urutan Hero hanya untuk komposisi visual, bukan hierarki — KRB tidak punya ketua.
+
+### 9.3 Daftar anggota
+
+| id | Nama EL | Poster asli | Cutout | Stiker Hero | Catatan review cutout |
+|---|---|---|---|---|---|
+| `el-kritis` | El Kritis | `el-kritis.jpg` (900×1131, 93 KB) | 549×693 | ✅ | ikon laso/koboi tersisa di kiri bawah (cutout & stiker) |
+| `el-turu` | El Turu | `el-turu.jpg` (899×1123, 83 KB) | 433×685 | ✅ | periksa tepi rambut/bahu |
+| `el-javo` | El Javo | `el-javo.jpg` (900×1117, 87 KB) | 423×690 | ✅ | stiker: bintik abu-abu di sekitar outline kanan |
+| `el-bata` | El Bata | `el-bata.jpg` (899×1134, 93 KB) | 398×677 | — | periksa tepi rambut/bahu |
+| `el-micin` | El Micin | `el-micin.jpg` (900×1128, 89 KB) | 508×672 | — | bentuk gelap/laso di kiri bawah, sliver kuning di kanan |
+| `el-sumo` | El Sumo | `el-sumo.jpg` (900×1138, 106 KB) | 557×723 | — | sisa laso di kiri bawah |
+| `el-sula` | El Sula | `el-sula.jpg` (900×1149, 110 KB) | 439×689 | — | periksa tepi rambut/bahu |
+| `el-kidal` | El Kidal | `el-kidal.png` (1080×1365, 937 KB) | 596×820 | — | periksa tepi rambut/bahu |
+| `el-botak` | El Botak | `el-botak.png` (1080×1323, 722 KB) | 539×808 | — | sisa warna merah/oranye di bahu kanan |
+| `el-gandila` | El Gandila | `el-gandila.png` (1080×1355, 891 KB) | 530×806 | — | periksa tepi rambut/bahu |
+| `el-pop` | El Pop | `el-pop.png` (1080×1355, 925 KB) | 514×887 | — | ikon laso tersisa di kiri bawah |
+| `el-tuna` | El Tuna | `el-tuna.png` (1080×1364, 1017 KB) | 529×816 | ✅ | periksa tepi rambut/bahu |
+| `el-copad` | El Copad | `el-copad.png` (1080×1333, 815 KB) | 496×771 | ✅ | periksa tepi rambut/bahu |
+| `el-sirna` | El Sirna | `el-sirna.png` (1080×1342, 979 KB) | 576×867 | — | potongan panel nama poster (teal + huruf kuning) di bawah |
+| `el-pribumi` | El Pribumi | `el-pribumi.png` (1080×1323, 852 KB) | 487×792 | ✅ | periksa tepi rambut/bahu |
+
+Semua cutout bertanda `needsPhotoReview: true`. Pangkal bawah cutout/stiker terpotong lurus — saat implementasi, tutupi dengan torn-paper border seperti mockup.
+
+### 9.4 Belum tersedia / perlu dikonfirmasi
+
+- Ejaan nama, nickname, dan nama lengkap (diketik manual dari poster), mis. `Aditya Prasetya W. Msi`.
+- `funFacts` dan `description` kosong — belum ada data asli.
+- Stiker outline putih hanya untuk 6 anggota Hero.
+- Poster PNG berukuran 0,7–1 MB per file; cutout 270–560 KB — pertimbangkan versi WebP teroptimasi (tanpa mengubah isi foto) sebelum produksi.

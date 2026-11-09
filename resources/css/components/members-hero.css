@@ -1,0 +1,309 @@
+/* ==================================================================
+   Members Hero — "THE EL ROSTER." + six-member sticker collage
+   ------------------------------------------------------------------
+   Same technique as the Home hero: a fixed-ratio stage (941 × 380
+   mockup px, from under the navbar to the torn paper). Every .mh-el sets
+     --x/--y position · --w/--h size (in % of the stage) · --r rotation
+     --z layer · --sx/--sy skew (headings)
+   Entrance motion only touches --ex/--ey/--er/--es + opacity.
+   Type uses cqw (1% of the stage width).
+
+   z-index plan: 0 big brush · 1 patterns · 2–3 back row · 4–6 front row
+                 · 7 heading brushes · 8 heading text · 9 checker/paper
+   Prefixes mh- / members-hero keep it apart from the Home hero.
+   ================================================================== */
+
+.members-hero {
+    position: relative;
+    overflow-x: clip;
+    background-color: var(--krb-background);
+}
+
+.members-hero__inner {
+    position: relative;
+    max-width: 1440px;
+    margin-inline: auto;
+    container-type: inline-size;
+}
+
+.members-hero__stage {
+    position: relative;
+    aspect-ratio: 941 / 380;
+    /* cutouts continue below the stage; the torn paper covers the seam */
+    overflow-y: clip;
+}
+
+.members-hero__collage {
+    position: absolute;
+    inset: 0;
+}
+
+.mh-heading {
+    margin: 0;
+}
+
+/* ---------- Shared placement ---------- */
+
+.members-hero__stage :where(.mh-el) {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--w, auto);
+    height: var(--h, auto);
+    translate: calc(var(--tx, 0%) + var(--ex, 0px)) calc(var(--ty, 0%) + var(--ey, 0px));
+    rotate: calc(var(--r, 0deg) + var(--er, 0deg));
+    scale: var(--es, 1);
+    z-index: var(--z, 1);
+    margin: 0;
+}
+
+.members-hero__stage :where(.mh-kicker, .mh-title) {
+    transform: skewY(var(--sy, 0deg)) skewX(var(--sx, 0deg));
+}
+
+.members-hero__stage :where(.mh-kicker, .mh-tagline) {
+    --tx: -50%;
+    --ty: -50%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* ---------- THE EL ---------- */
+
+.mh-kicker-brush { --x: 3.7%; --y: -4%; --w: 31.2%; --h: 50%; --r: -4deg; --z: 7; }
+.mh-crown        { --x: 5.8%; --y: 5.3%; --w: 6.1%; --r: -14deg; --z: 8; }
+
+.mh-kicker-brush > img {
+    filter: hue-rotate(-18deg) saturate(0.9) brightness(0.9);
+}
+
+.mh-kicker {
+    --x: 19.4%;
+    --y: 24.2%;
+    --sy: -5deg;
+    --sx: -8deg;
+    --z: 8;
+    color: #fff;
+    font-family: var(--font-headline);
+    font-size: 6.6cqw;
+    font-stretch: 75%;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.005em;
+    line-height: 1;
+}
+
+/* ---------- ROSTER. ---------- */
+
+.mh-title {
+    --x: 3%;
+    --y: 32%;
+    --sy: -5deg;
+    --sx: -8deg;
+    --z: 8;
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    font-size: 13.8cqw;
+    font-stretch: 62%;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.85;
+    white-space: nowrap;
+}
+
+.mh-title__dot {
+    display: inline-block;
+    width: 0.17em;
+    height: 0.17em;
+    margin-left: 0.03em;
+    border-radius: 9999px;
+    background-color: var(--krb-yellow);
+}
+
+/* ---------- Tagline ---------- */
+
+.mh-tagline-brush { --x: 3.1%; --y: 54.2%; --w: 35.3%; --h: 47.9%; --r: -6deg; --z: 7; }
+
+.mh-tagline {
+    --x: 20.7%;
+    --y: 78.2%;
+    --r: -7deg;
+    --z: 8;
+    color: var(--krb-ink);
+    font-family: var(--font-hand);
+    font-size: 2.9cqw;
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+.mh-tagline__line {
+    display: block;
+}
+
+.mh-tagline__line--indent {
+    padding-left: 1.2em;
+}
+
+.mh-arrow {
+    --x: 26%;
+    --y: 82%;
+    --w: 10.6%;
+    --r: -18deg;
+    --z: 8;
+    scale: 1 -1;
+}
+
+/* ---------- Collage decoration ---------- */
+
+.mh-collage-brush { --x: 35.1%; --y: -13%; --w: 65.9%; --h: 137%; --r: -8deg; --z: 0; }
+
+.mh-collage-brush > img {
+    filter: hue-rotate(-18deg) saturate(0.9) brightness(0.9);
+}
+
+.mh-halftone > img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.mh-halftone--left   { --x: 1.6%;  --y: 76.3%; --w: 9%;    --h: 22.4%; }
+.mh-halftone--mid    { --x: 36.7%; --y: 11.8%; --w: 10.6%; --h: 30.3%; }
+.mh-halftone--right  { --x: 88%;   --y: 3.2%;  --w: 11.2%; --h: 30.3%; }
+.mh-halftone--bottom { --x: 94%;   --y: 65.3%; --w: 6.4%;  --h: 26.3%; }
+
+.mh-accent { --z: 7; }
+.mh-accent--left  { --x: 44.6%; --y: 1.3%;  --w: 4.8%; --r: -40deg; }
+.mh-accent--right { --x: 88.8%; --y: 29%;   --w: 5.3%; --r: 15deg; }
+
+.mh-checker { --x: 82.5%; --y: 71%; --w: 17%; --z: 9; }
+
+.mh-checker > img {
+    filter: contrast(1.35) saturate(1.25) brightness(1.04);
+}
+
+/* ---------- Members ---------- */
+
+.mh-member {
+    filter: drop-shadow(0 0.25cqw 0.45cqw rgb(23 24 29 / 0.22));
+}
+
+.mh-member > img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mh-member--back-left    { --x: 41.8%; --y: 2.1%;  --w: 26.6%; --z: 3; }
+.mh-member--back-center  { --x: 55.2%; --y: -0.5%; --w: 28.3%; --z: 2; }
+.mh-member--back-right   { --x: 70.7%; --y: 4.7%;  --w: 28.2%; --z: 3; }
+.mh-member--front-left   { --x: 39.2%; --y: 38.2%; --w: 26.1%; --z: 4; }
+.mh-member--front-center { --x: 49%;   --y: 27.6%; --w: 34%;   --z: 6; }
+.mh-member--front-right  { --x: 67.7%; --y: 41.6%; --w: 26%;   --z: 5; }
+
+/* ---------- Torn paper seam (full bleed) ---------- */
+
+.members-hero__paper {
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    z-index: 9;
+    height: calc(min(100vw, 1440px) * 0.034);
+    background-color: #ece4d8;
+    background-image: url('/assets/krb/textures/paper-cream.webp');
+    background-blend-mode: multiply;
+    background-size: 420px;
+}
+
+/* ==================================================================
+   Laptop & tablet (768–1599px): heading type ≈ 14% smaller (as on
+   Home) so "ROSTER." never crowds the collage. Brushes shrink around
+   their centre. Large monitors keep the mockup proportions.
+   ================================================================== */
+@media (min-width: 768px) and (max-width: 1599.98px) {
+    .mh-kicker-brush  { --x: 5.9%; --y: -0.5%; --w: 26.9%; --h: 43%; }
+    .mh-crown         { --x: 6.6%; --y: 6.5%;  --w: 5.2%; }
+
+    .mh-kicker {
+        font-size: 5.7cqw;
+    }
+
+    .mh-title {
+        --x: 5.1%;
+        --y: 33%;
+        font-size: 12.9cqw;
+    }
+
+    .mh-tagline-brush { --x: 5.5%; --y: 57.6%; --w: 30.4%; --h: 41.2%; }
+
+    .mh-tagline {
+        --y: 78.4%;
+        font-size: 2.5cqw;
+    }
+
+    .mh-arrow { --x: 25%; --w: 9%; }
+}
+
+/* ==================================================================
+   Phones (< 768px): heading block on top, collage underneath.
+   ================================================================== */
+@media (max-width: 767.98px) {
+    .members-hero__inner {
+        max-width: 520px;
+    }
+
+    .members-hero__stage {
+        aspect-ratio: 390 / 800;
+    }
+
+    .mh-kicker-brush { --x: -0.3%; --y: -0.4%; --w: 63%;  --h: 15.8%; }
+    .mh-crown        { --x: 4.1%;  --y: 1%;    --w: 10.3%; }
+
+    .mh-kicker {
+        --x: 31.3%;
+        --y: 7.5%;
+        font-size: 13.7cqw;
+    }
+
+    .mh-title {
+        --x: 3.6%;
+        --y: 12.5%;
+        font-size: 32.8cqw;
+    }
+
+    .mh-tagline-brush { --x: 1.8%; --y: 23.8%; --w: 89.7%; --h: 16.8%; }
+
+    .mh-tagline {
+        --x: 46.7%;
+        --y: 32.3%;
+        font-size: 6.15cqw;
+    }
+
+    .mh-arrow { --x: 77%; --y: 37.5%; --w: 13.3%; --r: 35deg; }
+
+    .mh-collage-brush { --x: -5.1%; --y: 36.3%; --w: 110%; --h: 58.8%; --r: -6deg; }
+
+    .mh-halftone--left,
+    .mh-halftone--bottom {
+        display: none;
+    }
+
+    .mh-halftone--mid   { --x: 77%; --y: 1.3%;  --w: 20.5%; --h: 8.8%; }
+    .mh-halftone--right { --x: 82%; --y: 43.8%; --w: 18%;   --h: 8.8%; }
+
+    .mh-accent--left  { --x: 4.6%;  --y: 43%;   --w: 8.7%; }
+    .mh-accent--right { --x: 88.5%; --y: 52.5%; --w: 9.2%; }
+
+    .mh-checker { --x: 71.8%; --y: 83.8%; --w: 30.8%; }
+
+    .mh-member--back-left    { --x: -1%;   --y: 43.1%; --w: 38.5%; }
+    .mh-member--back-center  { --x: 30.3%; --y: 41.3%; --w: 39.7%; }
+    .mh-member--back-right   { --x: 61.5%; --y: 44%;   --w: 38.5%; }
+    .mh-member--front-left   { --x: -2%;   --y: 61.9%; --w: 38.5%; }
+    .mh-member--front-center { --x: 28.2%; --y: 58.8%; --w: 48.7%; }
+    .mh-member--front-right  { --x: 64.1%; --y: 63.1%; --w: 37.2%; }
+
+    .members-hero__paper {
+        height: 1.75rem;
+    }
+}

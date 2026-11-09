@@ -19,6 +19,6 @@ class HomePageTest extends TestCase
     {
         $response = $this->get(route('home'));
 
-        $response->assertInertia(fn (Assert $page) => $page->where('availableRoutes', ['home']));
+        $response->assertInertia(fn (Assert $page) => $page->where('availableRoutes', ['home', 'members']));
     }
 }
