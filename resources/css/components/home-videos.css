@@ -1,0 +1,284 @@
+/* ==================================================================
+   Home — Video Archive (sizes: mockup px × --mp)
+   ================================================================== */
+
+.krb-videos__inner {
+    display: grid;
+    grid-template-columns: calc(158 * var(--mp)) calc(389 * var(--mp)) 1fr;
+    column-gap: calc(10 * var(--mp));
+    align-items: start;
+    padding: calc(12 * var(--mp)) calc(51 * var(--mp)) calc(5 * var(--mp)) calc(42 * var(--mp));
+}
+
+.krb-videos__heading {
+    position: relative;
+    width: calc(150 * var(--mp));
+    padding: calc(12 * var(--mp)) calc(14 * var(--mp)) calc(14 * var(--mp)) calc(22 * var(--mp));
+}
+
+.krb-videos__brush {
+    position: absolute;
+    inset: calc(-6 * var(--mp)) calc(-8 * var(--mp)) calc(-8 * var(--mp)) calc(-4 * var(--mp));
+    rotate: -8deg;
+}
+
+.krb-videos__brush > img {
+    filter: hue-rotate(-18deg) saturate(0.9) brightness(0.9);
+}
+
+.krb-videos__title {
+    position: relative;
+    display: grid;
+    color: #fff;
+    font-size: calc(29 * var(--mp));
+    font-stretch: 78%;
+    line-height: 0.92;
+    text-transform: uppercase;
+    rotate: -8deg;
+}
+
+.krb-videos__title > span:last-child {
+    padding-left: 0.3em;
+}
+
+.krb-videos__scribble {
+    width: calc(72 * var(--mp));
+    margin: calc(2 * var(--mp)) 0 0 calc(66 * var(--mp));
+}
+
+.krb-videos__text {
+    max-width: calc(112 * var(--mp));
+    margin: calc(6 * var(--mp)) 0 0 calc(15 * var(--mp));
+    color: var(--krb-ink);
+    font-size: max(0.875rem, calc(12.5 * var(--mp)));
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* ---------- Player ---------- */
+
+.krb-player {
+    position: relative;
+    aspect-ratio: 389 / 172;
+    margin: calc(4 * var(--mp)) 0 0;
+    overflow: hidden;
+    border-radius: calc(8 * var(--mp));
+    background-color: var(--krb-ink);
+    box-shadow: 0 calc(4 * var(--mp)) calc(12 * var(--mp)) rgb(23 24 29 / 0.2);
+}
+
+.krb-player__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--photo-focus, 50% 50%);
+}
+
+.krb-player::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.55), transparent 35%);
+    pointer-events: none;
+}
+
+.krb-player__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: calc(44 * var(--mp));
+    height: calc(44 * var(--mp));
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: max(2px, calc(2.6 * var(--mp))) solid #fff;
+    border-radius: 9999px;
+    background-color: rgb(23 24 29 / 0.7);
+    color: #fff;
+    cursor: pointer;
+    translate: -50% -50%;
+}
+
+.krb-player__play[aria-disabled='true'] {
+    cursor: default;
+}
+
+.krb-player__play > svg {
+    width: 42%;
+    height: 42%;
+    margin-left: 8%;
+}
+
+.krb-player__soon {
+    position: absolute;
+    top: calc(10 * var(--mp));
+    left: calc(10 * var(--mp));
+    z-index: 1;
+    padding: 0.2em 0.6em;
+    border-radius: 0.25rem;
+    background-color: var(--krb-yellow);
+    color: var(--krb-ink);
+    font-size: max(0.75rem, calc(10.5 * var(--mp)));
+    font-weight: 800;
+}
+
+.krb-player__controls {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: calc(13 * var(--mp));
+    height: calc(26 * var(--mp));
+    padding-inline: calc(14 * var(--mp));
+    color: #fff;
+    font-size: max(0.6875rem, calc(10.5 * var(--mp)));
+    font-weight: 600;
+}
+
+.krb-player__controls > svg {
+    flex: none;
+    width: calc(13 * var(--mp));
+    height: calc(13 * var(--mp));
+}
+
+.krb-player__time {
+    white-space: nowrap;
+}
+
+.krb-player__progress {
+    flex: 1;
+    height: max(2px, calc(2 * var(--mp)));
+    border-radius: 9999px;
+    background-color: rgb(255 255 255 / 0.55);
+}
+
+/* ---------- List ---------- */
+
+.krb-videos__list {
+    display: grid;
+    gap: calc(9 * var(--mp));
+    margin: calc(2 * var(--mp)) 0 0 calc(11 * var(--mp));
+    padding: 0;
+    list-style: none;
+}
+
+.krb-video-item {
+    display: grid;
+    grid-template-columns: calc(112 * var(--mp)) 1fr;
+    align-items: start;
+    gap: calc(10 * var(--mp));
+}
+
+.krb-video-item__thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 112 / 51;
+    overflow: hidden;
+    border-radius: calc(6 * var(--mp));
+    background-color: #d9d6d2;
+}
+
+.krb-video-item__thumb > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--photo-focus, 50% 50%);
+}
+
+.krb-video-item__badge {
+    position: absolute;
+    right: calc(5 * var(--mp));
+    bottom: calc(5 * var(--mp));
+    padding: 0.15em 0.5em;
+    border-radius: calc(4 * var(--mp));
+    background-color: rgb(23 24 29 / 0.8);
+    color: #fff;
+    font-size: max(0.6875rem, calc(10.5 * var(--mp)));
+    font-weight: 700;
+}
+
+.krb-video-item__body {
+    display: grid;
+    gap: calc(3 * var(--mp));
+    padding-top: calc(4 * var(--mp));
+}
+
+.krb-video-item__title {
+    color: var(--krb-ink);
+    font-size: max(0.9375rem, calc(13.5 * var(--mp)));
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.krb-video-item__meta {
+    color: #55565f;
+    font-size: max(0.8125rem, calc(11 * var(--mp)));
+    font-weight: 500;
+}
+
+@media (max-width: 767.98px) {
+    .krb-videos__inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2rem 1rem 2.5rem;
+    }
+
+    .krb-videos__heading {
+        width: 13.5rem;
+        padding: 1.1rem 1.25rem 1.2rem 1.5rem;
+    }
+
+    .krb-videos__brush {
+        inset: -0.6rem -1rem -0.8rem -0.5rem;
+    }
+
+    .krb-videos__title {
+        font-size: 2.1rem;
+    }
+
+    .krb-videos__scribble {
+        width: 5rem;
+        margin-left: 5rem;
+    }
+
+    .krb-videos__text {
+        max-width: 22rem;
+        margin-left: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .krb-player {
+        aspect-ratio: 16 / 9;
+        border-radius: 0.6rem;
+    }
+
+    .krb-player__controls {
+        gap: 0.75rem;
+        height: 2.25rem;
+        padding-inline: 0.85rem;
+    }
+
+    .krb-player__controls > svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .krb-videos__list {
+        gap: 0.85rem;
+        margin: 0;
+    }
+
+    .krb-video-item {
+        grid-template-columns: 8.5rem 1fr;
+        gap: 0.75rem;
+    }
+
+    .krb-video-item__thumb {
+        border-radius: 0.5rem;
+    }
+}

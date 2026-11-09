@@ -1,0 +1,283 @@
+/* ==================================================================
+   Home — The Crew (sizes: mockup px × --mp)
+   ================================================================== */
+
+.krb-crew__paper {
+    inset: calc(3 * var(--mp)) 0 0;
+    background-color: #f6f1ec;
+}
+
+.krb-crew__inner {
+    display: grid;
+    grid-template-columns: calc(205 * var(--mp)) minmax(0, 1fr) auto;
+    align-items: start;
+    padding: calc(20 * var(--mp)) calc(21 * var(--mp)) calc(14 * var(--mp)) calc(30 * var(--mp));
+}
+
+.krb-crew__intro {
+    position: relative;
+    display: grid;
+    justify-items: start;
+}
+
+.krb-crew__tag {
+    position: relative;
+    display: inline-grid;
+    margin: 0 0 0 calc(2 * var(--mp));
+    padding: calc(5 * var(--mp)) calc(20 * var(--mp)) calc(4 * var(--mp));
+    color: #fff;
+    font-family: var(--font-hand);
+    font-size: max(0.9375rem, calc(15 * var(--mp)));
+    font-weight: 700;
+    line-height: 1.1;
+    rotate: -4deg;
+}
+
+.krb-crew__tag-text {
+    position: relative;
+}
+
+.krb-crew__tag-tape {
+    position: absolute;
+    inset: 0;
+}
+
+.krb-crew__tag-tape > img {
+    filter: saturate(2.4) brightness(0.62) hue-rotate(-8deg);
+}
+
+.krb-crew__title {
+    display: grid;
+    margin-top: calc(10 * var(--mp));
+    font-size: calc(31 * var(--mp));
+    rotate: -3deg;
+}
+
+.krb-crew__title > span:first-child {
+    padding-left: 0.3em;
+}
+
+.krb-crew__text {
+    max-width: calc(158 * var(--mp));
+    margin: calc(9 * var(--mp)) 0 0 calc(3 * var(--mp));
+    color: var(--krb-ink);
+    font-size: max(0.875rem, calc(12.5 * var(--mp)));
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.krb-crew__scribble {
+    width: calc(80 * var(--mp));
+    margin: calc(6 * var(--mp)) 0 0 calc(10 * var(--mp));
+}
+
+/* ---------- Member cards ---------- */
+
+.krb-crew__list {
+    display: grid;
+    grid-auto-columns: calc(98 * var(--mp));
+    grid-auto-flow: column;
+    gap: calc(8 * var(--mp));
+    margin: calc(10 * var(--mp)) 0 0 calc(12 * var(--mp));
+    padding: calc(6 * var(--mp)) calc(4 * var(--mp)) calc(4 * var(--mp));
+    overflow-x: auto;
+    list-style: none;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.krb-crew__list::-webkit-scrollbar {
+    display: none;
+}
+
+.krb-member {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    scroll-snap-align: start;
+}
+
+.krb-member:nth-child(odd) { rotate: -1.5deg; }
+.krb-member:nth-child(even) { rotate: 1.2deg; }
+
+.krb-member__photo {
+    width: 100%;
+    aspect-ratio: 98 / 142;
+    overflow: hidden;
+    border: calc(3 * var(--mp)) solid #fffdfa;
+    background:
+        repeating-conic-gradient(
+            from -6deg at 50% 64%,
+            #f26a2b 0deg 9deg,
+            #1f1a1d 9deg 12deg,
+            #f9ab2a 12deg 21deg,
+            #c73a1c 21deg 24deg
+        );
+    box-shadow: 0 calc(3 * var(--mp)) calc(8 * var(--mp)) rgb(23 24 29 / 0.22);
+}
+
+.krb-member__photo > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.krb-member__placeholder {
+    display: grid;
+    place-items: center;
+    align-content: end;
+    height: 100%;
+    color: rgb(23 24 29 / 0.78);
+}
+
+.krb-member__placeholder {
+    position: relative;
+}
+
+.krb-member__placeholder > svg {
+    width: 86%;
+    height: auto;
+    fill: rgb(23 24 29 / 0.82);
+}
+
+.krb-member__placeholder > span {
+    position: absolute;
+    top: 14%;
+    margin-bottom: 0;
+    padding: 0.1em 0.5em;
+    border-radius: 9999px;
+    background-color: rgb(255 255 255 / 0.85);
+    color: var(--krb-ink);
+    font-size: max(0.6875rem, calc(9 * var(--mp)));
+    font-weight: 700;
+}
+
+.krb-member__name {
+    position: relative;
+    width: 94%;
+    margin: calc(-24 * var(--mp)) 0 0;
+    padding: calc(6 * var(--mp)) calc(4 * var(--mp));
+    background-color: #fffdfa;
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    font-size: max(0.875rem, calc(13 * var(--mp)));
+    font-stretch: 88%;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 calc(2 * var(--mp)) calc(5 * var(--mp)) rgb(23 24 29 / 0.18);
+    rotate: -1.5deg;
+}
+
+.krb-member:nth-child(even) .krb-member__name {
+    rotate: 1.5deg;
+}
+
+.krb-crew__next {
+    display: grid;
+    place-items: center;
+    align-self: center;
+    width: max(2.5rem, calc(29 * var(--mp)));
+    height: max(2.5rem, calc(29 * var(--mp)));
+    margin: calc(30 * var(--mp)) 0 0 calc(12 * var(--mp));
+    border: 0;
+    border-radius: 9999px;
+    background-color: var(--krb-ink);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.krb-crew__next:hover:not(:disabled) {
+    background-color: var(--krb-primary);
+}
+
+.krb-crew__next:disabled {
+    cursor: default;
+    opacity: 0.35;
+}
+
+.krb-crew__next > svg {
+    width: 50%;
+    height: 50%;
+}
+
+.krb-crew__crown {
+    position: absolute;
+    top: calc(18 * var(--mp));
+    left: calc(220 * var(--mp));
+    width: calc(37 * var(--mp));
+    rotate: -10deg;
+}
+
+.krb-crew__accent {
+    position: absolute;
+    top: calc(14 * var(--mp));
+    right: calc(30 * var(--mp));
+    width: calc(38 * var(--mp));
+    rotate: 25deg;
+}
+
+@media (max-width: 767.98px) {
+    .krb-crew__paper {
+        inset: 0.25rem 0 0;
+    }
+
+    .krb-crew__inner {
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding: 2.5rem 1rem 4rem;
+    }
+
+    .krb-crew__intro {
+        grid-column: 1 / -1;
+    }
+
+    .krb-crew__title {
+        font-size: 2.4rem;
+    }
+
+    .krb-crew__text {
+        max-width: 22rem;
+        font-size: 1rem;
+    }
+
+    .krb-crew__scribble {
+        width: 6rem;
+    }
+
+    .krb-crew__list {
+        grid-auto-columns: 9.5rem;
+        gap: 0.75rem;
+        margin: 1.75rem 0 0;
+        padding: 0.5rem 0.25rem 0.75rem;
+    }
+
+    .krb-member__photo {
+        border-width: 0.2rem;
+    }
+
+    .krb-member__placeholder > span {
+        margin-bottom: 2.25rem;
+    }
+
+    .krb-member__name {
+        margin-top: -1.75rem;
+        padding: 0.45rem 0.25rem;
+    }
+
+    .krb-crew__next {
+        margin: 1.75rem 0 0 0.5rem;
+    }
+
+    .krb-crew__crown {
+        top: 1.5rem;
+        left: auto;
+        right: 1rem;
+        width: 2.75rem;
+    }
+
+    .krb-crew__accent {
+        display: none;
+    }
+}

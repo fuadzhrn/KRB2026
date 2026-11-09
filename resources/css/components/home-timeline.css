@@ -1,0 +1,210 @@
+/* ==================================================================
+   Home — Timeline (sizes: mockup px × --mp)
+   ================================================================== */
+
+.krb-timeline__band {
+    inset: calc(9 * var(--mp)) 0 calc(4 * var(--mp));
+    background-color: #e3d5f5;
+    background-image: url('/assets/krb/textures/paper-cream.webp');
+    background-blend-mode: multiply;
+    background-size: calc(320 * var(--mp));
+}
+
+.krb-timeline__inner {
+    display: grid;
+    grid-template-columns: calc(175 * var(--mp)) 1fr;
+    align-items: start;
+    min-height: calc(172 * var(--mp));
+    padding: calc(27 * var(--mp)) calc(21 * var(--mp)) calc(16 * var(--mp)) calc(38 * var(--mp));
+}
+
+.krb-timeline__intro {
+    position: relative;
+    padding-top: calc(17 * var(--mp));
+}
+
+.krb-timeline__title {
+    font-size: calc(39 * var(--mp));
+    text-transform: uppercase;
+}
+
+.krb-timeline__scribble {
+    width: calc(122 * var(--mp));
+    margin: calc(2 * var(--mp)) 0 0 calc(-6 * var(--mp));
+    rotate: -3deg;
+}
+
+.krb-timeline__text {
+    max-width: calc(150 * var(--mp));
+    margin: calc(10 * var(--mp)) 0 0;
+    color: var(--krb-ink);
+    font-size: max(0.875rem, calc(12.3 * var(--mp)));
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.krb-timeline__track {
+    position: relative;
+}
+
+.krb-timeline__path {
+    position: absolute;
+    top: calc(77 * var(--mp));
+    left: 0;
+    width: 100%;
+    height: calc(24 * var(--mp));
+    overflow: visible;
+    pointer-events: none;
+}
+
+.krb-timeline__path > path {
+    fill: none;
+    stroke: var(--krb-primary);
+    stroke-dasharray: 5 5;
+    stroke-linecap: round;
+    stroke-width: max(1.5px, calc(1.8 * var(--mp)));
+    vector-effect: non-scaling-stroke;
+}
+
+.krb-timeline__list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.krb-timeline__item {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+}
+
+.krb-timeline__photo {
+    --frame: calc(3 * var(--mp));
+    position: relative;
+    width: calc(148 * var(--mp));
+    aspect-ratio: 148 / 76;
+    margin: 0;
+}
+
+.krb-timeline__item--trip .krb-timeline__photo {
+    width: calc(136 * var(--mp));
+    aspect-ratio: 136 / 84;
+    margin-top: calc(-8 * var(--mp));
+}
+
+.krb-timeline__label {
+    position: relative;
+    z-index: 2;
+    margin-top: calc(-21 * var(--mp));
+    padding: calc(4 * var(--mp)) calc(13 * var(--mp)) calc(3 * var(--mp));
+    clip-path: var(--label-clip);
+    background-color: var(--krb-yellow);
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    font-size: calc(15 * var(--mp));
+    font-stretch: 85%;
+    font-style: italic;
+    font-weight: 900;
+    line-height: 1;
+    rotate: -4deg;
+}
+
+.krb-timeline__node {
+    position: relative;
+    z-index: 2;
+    width: calc(12 * var(--mp));
+    height: calc(12 * var(--mp));
+    margin-top: calc(5 * var(--mp));
+    border: max(2px, calc(2.6 * var(--mp))) solid var(--krb-primary);
+    border-radius: 9999px;
+    background-color: #f3ecfb;
+}
+
+.krb-timeline__caption {
+    margin: calc(4 * var(--mp)) 0 0;
+    color: var(--krb-ink);
+    font-size: max(0.8125rem, calc(12.3 * var(--mp)));
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.krb-timeline__accent {
+    position: absolute;
+    width: calc(34 * var(--mp));
+}
+
+.krb-timeline__accent--start { top: calc(-14 * var(--mp)); left: calc(4 * var(--mp)); rotate: -25deg; }
+.krb-timeline__accent--end   { top: calc(-12 * var(--mp)); right: calc(-2 * var(--mp)); rotate: 20deg; }
+
+@media (max-width: 767.98px) {
+    .krb-timeline__band {
+        inset: 0.5rem 0;
+    }
+
+    .krb-timeline__inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 1rem 3.25rem;
+    }
+
+    .krb-timeline__intro {
+        padding-top: 0;
+    }
+
+    .krb-timeline__title {
+        font-size: 2.75rem;
+    }
+
+    .krb-timeline__scribble {
+        width: 8rem;
+    }
+
+    .krb-timeline__text {
+        max-width: none;
+        margin-top: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .krb-timeline__path,
+    .krb-timeline__accent--start {
+        display: none;
+    }
+
+    .krb-timeline__list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 0.75rem;
+    }
+
+    .krb-timeline__photo,
+    .krb-timeline__item--trip .krb-timeline__photo {
+        --frame: 0.2rem;
+        width: 100%;
+        aspect-ratio: 2 / 1;
+        margin-top: 0;
+    }
+
+    .krb-timeline__label {
+        margin-top: -1rem;
+        padding: 0.3rem 0.8rem 0.2rem;
+        font-size: 1.05rem;
+    }
+
+    .krb-timeline__node {
+        width: 0.8rem;
+        height: 0.8rem;
+        margin-top: 0.4rem;
+    }
+
+    .krb-timeline__caption {
+        font-size: 0.875rem;
+    }
+
+    .krb-timeline__accent--end {
+        top: -2.75rem;
+        right: 0;
+        width: 2.25rem;
+    }
+}

@@ -1,0 +1,510 @@
+/* ==================================================================
+   Home sections below the hero.
+   Desktop sizes are mockup pixels × --mp (see app.css), so the layout
+   matches the 941px mockup at 1440px and scales down proportionally.
+   Phones (< 768px) switch to stacked layouts with rem-based sizes.
+   ================================================================== */
+
+.krb-section {
+    position: relative;
+    container-type: inline-size;
+}
+
+.krb-section__inner {
+    position: relative;
+    max-width: 1440px;
+    margin-inline: auto;
+}
+
+/* ---------- Shared scrapbook bits ---------- */
+
+/* underline-scribble.svg: purple stroke = viewBox y 14→36, yellow = y 33→49 */
+.krb-scribble {
+    display: block;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.krb-scribble > img {
+    display: block;
+    width: 100%;
+}
+
+.krb-scribble--purple,
+.krb-scribble--white {
+    aspect-ratio: 180 / 22;
+}
+
+.krb-scribble--purple > img,
+.krb-scribble--white > img {
+    height: 272.7%;
+    translate: 0 -23.33%;
+}
+
+.krb-scribble--white > img {
+    filter: brightness(0) invert(1);
+}
+
+.krb-scribble--yellow {
+    aspect-ratio: 180 / 16;
+}
+
+.krb-scribble--yellow > img {
+    height: 375%;
+    translate: 0 -55%;
+}
+
+.krb-accent {
+    display: block;
+    pointer-events: none;
+}
+
+.krb-accent > img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Recolour the yellow strokes to KRB purple */
+.krb-accent--purple > img {
+    filter: brightness(0) invert(13%) sepia(92%) saturate(6200%) hue-rotate(268deg) brightness(86%);
+}
+
+.krb-torn-paper {
+    position: absolute;
+    display: block;
+    clip-path: var(--torn-clip);
+    pointer-events: none;
+}
+
+.krb-display-heading {
+    margin: 0;
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    font-stretch: 85%;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+}
+
+.krb-pill-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    min-height: max(2.5rem, calc(26 * var(--mp)));
+    padding-inline: max(1rem, calc(19 * var(--mp)));
+    border: 2px solid var(--krb-primary);
+    border-radius: 9999px;
+    color: var(--krb-primary);
+    font-size: max(0.875rem, calc(12.5 * var(--mp)));
+    font-weight: 800;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.krb-pill-link:hover {
+    background-color: var(--krb-primary);
+    color: #fff;
+}
+
+.krb-pill-link > svg {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+/* ==================================================================
+   KRB in Numbers
+   ================================================================== */
+
+.krb-numbers__inner {
+    display: grid;
+    grid-template-columns: calc(203 * var(--mp)) 1fr;
+    align-items: center;
+    min-height: calc(138 * var(--mp));
+    padding: calc(4 * var(--mp)) calc(41 * var(--mp)) calc(4 * var(--mp)) calc(55 * var(--mp));
+}
+
+.krb-numbers__paper {
+    inset: calc(2 * var(--mp)) calc(16 * var(--mp)) calc(2 * var(--mp)) calc(15 * var(--mp));
+    background-color: #ece4d8;
+    background-image: url('/assets/krb/textures/paper-cream.webp');
+    background-blend-mode: multiply;
+    background-size: calc(320 * var(--mp));
+}
+
+.krb-numbers__title {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: start;
+    margin: 0;
+    color: var(--krb-primary);
+    font-family: var(--font-hand);
+    font-size: calc(35 * var(--mp));
+    font-weight: 700;
+    line-height: 0.92;
+    text-transform: uppercase;
+    rotate: -7deg;
+}
+
+.krb-numbers__title-big {
+    font-size: 1.5em;
+    line-height: 0.95;
+}
+
+.krb-numbers__scribble {
+    width: calc(112 * var(--mp));
+    margin: calc(2 * var(--mp)) 0 0 calc(62 * var(--mp));
+}
+
+.krb-numbers__list {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.krb-numbers__item {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: calc(4 * var(--mp));
+    min-height: calc(58 * var(--mp));
+    color: var(--krb-ink);
+    text-align: center;
+}
+
+.krb-numbers__item + .krb-numbers__item {
+    border-left: max(1.5px, calc(1.6 * var(--mp))) solid var(--krb-ink);
+}
+
+.krb-numbers__value {
+    font-family: var(--font-headline);
+    font-size: calc(39 * var(--mp));
+    font-stretch: 95%;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 0.85;
+}
+
+.krb-numbers__infinity {
+    display: block;
+    width: 1.3em;
+    height: 0.85em;
+}
+
+.krb-numbers__label {
+    font-family: var(--font-headline);
+    font-size: max(0.875rem, calc(16 * var(--mp)));
+    font-stretch: 95%;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.krb-numbers__accent {
+    position: absolute;
+    top: calc(8 * var(--mp));
+    right: calc(36 * var(--mp));
+    width: calc(50 * var(--mp));
+    rotate: 25deg;
+}
+
+/* ==================================================================
+   Momen Favorit
+   ================================================================== */
+
+.krb-moments__inner {
+    display: grid;
+    grid-template-columns: calc(212 * var(--mp)) 1fr;
+    align-items: start;
+    padding: calc(2 * var(--mp)) calc(16 * var(--mp)) calc(6 * var(--mp)) calc(15 * var(--mp));
+}
+
+.krb-moments__intro {
+    position: relative;
+    display: grid;
+    justify-items: start;
+    padding-top: calc(22 * var(--mp));
+}
+
+.krb-moments__crown {
+    position: absolute;
+    top: calc(0 * var(--mp));
+    left: calc(22 * var(--mp));
+    width: calc(38 * var(--mp));
+    rotate: -10deg;
+}
+
+.krb-moments__heading {
+    position: relative;
+    width: calc(200 * var(--mp));
+    padding: calc(6 * var(--mp)) 0 calc(10 * var(--mp)) calc(22 * var(--mp));
+}
+
+.krb-moments__brush {
+    position: absolute;
+    inset: calc(-18 * var(--mp)) calc(-12 * var(--mp)) calc(-26 * var(--mp)) calc(-16 * var(--mp));
+    rotate: -6deg;
+}
+
+.krb-moments__title {
+    position: relative;
+    display: grid;
+    font-size: calc(45 * var(--mp));
+    rotate: -6deg;
+}
+
+.krb-moments__title > span:last-child {
+    padding-left: 0.25em;
+}
+
+.krb-moments__text {
+    max-width: calc(152 * var(--mp));
+    margin: calc(8 * var(--mp)) 0 0 calc(37 * var(--mp));
+    color: var(--krb-ink);
+    font-size: max(0.875rem, calc(12.3 * var(--mp)));
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.krb-moments__intro > .krb-pill-link {
+    margin: calc(11 * var(--mp)) 0 0 calc(32 * var(--mp));
+}
+
+.krb-moments__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.08fr;
+    gap: calc(5 * var(--mp));
+    margin: calc(34 * var(--mp)) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Polaroid card */
+.krb-polaroid {
+    position: relative;
+    padding: calc(6 * var(--mp)) calc(6 * var(--mp)) calc(12 * var(--mp));
+    background-color: #fffdfa;
+    box-shadow:
+        0 calc(3 * var(--mp)) calc(8 * var(--mp)) rgb(23 24 29 / 0.16),
+        0 0 0 1px rgb(23 24 29 / 0.05);
+}
+
+.krb-polaroid:nth-child(1) { rotate: -2deg; }
+.krb-polaroid:nth-child(2) { rotate: 1deg; margin-top: calc(6 * var(--mp)); }
+.krb-polaroid:nth-child(3) { rotate: -1.5deg; }
+.krb-polaroid:nth-child(4) { rotate: 2.5deg; margin-top: calc(4 * var(--mp)); }
+
+.krb-polaroid__tape {
+    position: absolute;
+    top: calc(-13 * var(--mp));
+    left: 50%;
+    z-index: 2;
+    width: calc(80 * var(--mp));
+    height: calc(26 * var(--mp));
+    translate: -50% 0;
+    rotate: -3deg;
+}
+
+.krb-polaroid__tape > img {
+    filter: saturate(1.6) brightness(0.92);
+}
+
+.krb-polaroid__photo {
+    aspect-ratio: 163 / 150;
+    overflow: hidden;
+    background-color: #d9d6d2;
+}
+
+.krb-polaroid__photo > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--photo-focus, 50% 50%);
+}
+
+.krb-polaroid__title {
+    margin: calc(8 * var(--mp)) 0 0 calc(6 * var(--mp));
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    font-size: max(1rem, calc(17.5 * var(--mp)));
+    font-stretch: 85%;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+}
+
+.krb-polaroid__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    margin: calc(5 * var(--mp)) 0 0 calc(6 * var(--mp));
+    color: var(--krb-ink);
+    font-size: max(0.8125rem, calc(12.3 * var(--mp)));
+    font-weight: 500;
+}
+
+.krb-polaroid__meta > svg {
+    flex: none;
+    width: 1.15em;
+    height: 1.15em;
+    color: var(--krb-primary);
+}
+
+.krb-moments__accent {
+    position: absolute;
+    top: calc(14 * var(--mp));
+    left: calc(512 * var(--mp));
+    width: calc(34 * var(--mp));
+    rotate: 20deg;
+}
+
+.krb-moments__crown-right {
+    position: absolute;
+    top: calc(9 * var(--mp));
+    right: calc(24 * var(--mp));
+    width: calc(50 * var(--mp));
+    rotate: 12deg;
+}
+
+.krb-moments__squiggle {
+    position: absolute;
+    width: calc(50 * var(--mp));
+}
+
+.krb-moments__squiggle--one { top: calc(246 * var(--mp)); left: calc(320 * var(--mp)); }
+.krb-moments__squiggle--two { top: calc(248 * var(--mp)); right: calc(70 * var(--mp)); width: calc(40 * var(--mp)); }
+
+/* ==================================================================
+   Phones
+   ================================================================== */
+@media (max-width: 767.98px) {
+    /* Numbers */
+    .krb-numbers__inner {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 2rem 1.5rem 2.25rem;
+    }
+
+    .krb-numbers__paper {
+        inset: 0.25rem 0.5rem;
+    }
+
+    .krb-numbers__title {
+        font-size: 1.75rem;
+    }
+
+    .krb-numbers__scribble {
+        width: 7rem;
+        margin-left: 3.5rem;
+    }
+
+    .krb-numbers__list {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 1.25rem;
+    }
+
+    .krb-numbers__item:nth-child(3) {
+        border-left: 0;
+    }
+
+    .krb-numbers__value {
+        font-size: 2.5rem;
+    }
+
+    .krb-numbers__infinity {
+    display: block;
+    width: 1.3em;
+    height: 0.85em;
+}
+
+.krb-numbers__label {
+        font-size: 1rem;
+    }
+
+    .krb-numbers__accent {
+        top: 1.25rem;
+        right: 1.5rem;
+        width: 2.25rem;
+    }
+
+    /* Moments */
+    .krb-moments__inner {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem 2.5rem;
+    }
+
+    .krb-moments__intro {
+        padding-top: 1.75rem;
+    }
+
+    .krb-moments__crown {
+        left: 1rem;
+        width: 2.5rem;
+    }
+
+    .krb-moments__heading {
+        width: 15rem;
+        padding: 0.75rem 0 1.25rem 1.25rem;
+    }
+
+    .krb-moments__brush {
+        inset: -0.75rem 0 -1.25rem;
+    }
+
+    .krb-moments__title {
+        font-size: 3rem;
+    }
+
+    .krb-moments__text {
+        max-width: 22rem;
+        margin: 1rem 0 0 0.5rem;
+        font-size: 1rem;
+    }
+
+    .krb-moments__intro > .krb-pill-link {
+        margin: 1rem 0 0 0.5rem;
+    }
+
+    .krb-moments__cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem 0.75rem;
+        margin-top: 2.25rem;
+    }
+
+    .krb-polaroid {
+        padding: 0.375rem 0.375rem 0.75rem;
+    }
+
+    .krb-polaroid__tape {
+        top: -0.75rem;
+        width: 4.5rem;
+        height: 1.4rem;
+    }
+
+    .krb-polaroid__title {
+        margin: 0.5rem 0 0 0.25rem;
+    }
+
+    .krb-polaroid__meta {
+        margin: 0.25rem 0 0 0.25rem;
+    }
+
+    .krb-moments__accent,
+    .krb-moments__squiggle {
+        display: none;
+    }
+
+    .krb-moments__crown-right {
+        top: 2rem;
+        right: 1rem;
+        width: 3rem;
+    }
+}

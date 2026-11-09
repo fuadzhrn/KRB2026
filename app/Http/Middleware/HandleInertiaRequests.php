@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -15,6 +16,15 @@ class HandleInertiaRequests extends Middleware
      * @var string
      */
     protected $rootView = 'app';
+
+    /**
+     * Named routes the site navigation may link to. Only the ones that
+     * actually exist are shared, so the frontend never renders a link to
+     * a page that hasn't been built yet.
+     *
+     * @var list<string>
+     */
+    private const NAVIGABLE_ROUTES = ['home', 'archive', 'members', 'about'];
 
     /**
      * Determines the current asset version.
@@ -37,7 +47,10 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'availableRoutes' => fn (): array => array_values(array_filter(
+                self::NAVIGABLE_ROUTES,
+                fn (string $name): bool => Route::has($name),
+            )),
         ];
     }
 }

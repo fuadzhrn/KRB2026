@@ -1,4 +1,13 @@
 @import 'tailwindcss';
+/* Archivo variable (italic, width axis 62–125%) for condensed / italic display headings */
+@import '@fontsource-variable/archivo/wdth-italic.css';
+@import './components/navbar.css';
+@import './components/home-hero.css';
+@import './components/home-sections.css';
+@import './components/home-timeline.css';
+@import './components/home-videos.css';
+@import './components/home-crew.css';
+@import './components/footer.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -15,6 +24,14 @@
     --krb-lavender: #eee1f8;
     --krb-deep-purple: #48188b;
 
+    /* One mockup pixel. The final mockup is 941px wide and maps to a
+       1440px layout; sections size themselves with calc(N * var(--mp)).
+       cqw resolves against the section (each one is an inline-size container). */
+    --mp: min(calc(100cqw / 941), 1.5303px);
+
+    /* Navbar height (≈ 71px @1280 · 76px @1440 · 84px @1920, 68px on phones) */
+    --krb-nav-h: clamp(4rem, 3.2vw + 1.9rem, 5.25rem);
+
     /* Planned z-index scale */
     --krb-z-base: 0;
     --krb-z-decor: 10;
@@ -23,6 +40,12 @@
     --krb-z-nav: 50;
     --krb-z-overlay: 60;
     --krb-z-skip: 100;
+}
+
+@media (max-width: 899.98px) {
+    :root {
+        --krb-nav-h: 4.25rem;
+    }
 }
 
 @theme inline {
@@ -37,6 +60,7 @@
     --font-body: var(--krb-font-body, 'Plus Jakarta Sans'), ui-sans-serif, system-ui, sans-serif;
     --font-display: var(--krb-font-display, 'Archivo Black'), 'Arial Black', Impact, sans-serif;
     --font-hand: var(--krb-font-hand, 'Kalam'), cursive;
+    --font-headline: 'Archivo Variable', var(--krb-font-display, 'Archivo Black'), 'Arial Black', sans-serif;
 }
 
 /* ------------------------------------------------------------------

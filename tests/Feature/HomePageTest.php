@@ -14,4 +14,11 @@ class HomePageTest extends TestCase
         $response->assertOk();
         $response->assertInertia(fn (Assert $page) => $page->component('Home'));
     }
+
+    public function test_only_existing_navigation_routes_are_shared_with_the_frontend(): void
+    {
+        $response = $this->get(route('home'));
+
+        $response->assertInertia(fn (Assert $page) => $page->where('availableRoutes', ['home']));
+    }
 }

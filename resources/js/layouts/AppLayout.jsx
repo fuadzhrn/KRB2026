@@ -1,9 +1,7 @@
-/**
- * Base layout for all public KRB pages.
- *
- * Navbar and Footer slots are intentionally empty for now — they are
- * implemented in their own stages and will be mounted here.
- */
+import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
+
+/** Base layout for all public KRB pages. */
 export default function AppLayout({ children }) {
     return (
         <div className="relative flex min-h-dvh flex-col overflow-x-clip">
@@ -11,13 +9,13 @@ export default function AppLayout({ children }) {
                 Langsung ke konten
             </a>
 
-            {/* <Navbar /> — Tahap 2 */}
+            <Navbar />
 
             <main id="main-content" className="flex-1">
                 {children}
             </main>
 
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 }
