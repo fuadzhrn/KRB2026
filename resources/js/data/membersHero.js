@@ -30,7 +30,7 @@ export const membersHeroCollage = heroMembers
     .map((member) => ({
         id: member.id,
         elName: member.elName,
-        image: member.photos.heroSticker,
+        image: member.heroSticker,
         ...COLLAGE_SLOTS[member.id],
     }));
 

@@ -1,0 +1,508 @@
+/* ==================================================================
+   Members — The EL Roster
+   Intro bar on torn paper + poster-style member cards.
+   Type uses clamp() tuned for laptops (1280–1440) first; large
+   monitors grow a little, phones get their own grid.
+   Rows: featured (4) · mixed (2 standard + 3 compact + note) · compact (rest)
+   ================================================================== */
+
+.members-roster {
+    position: relative;
+    padding-bottom: clamp(3rem, 5vw, 5rem);
+    background-color: var(--krb-background);
+}
+
+.members-roster__inner {
+    display: grid;
+    gap: clamp(1.75rem, 3vw, 2.75rem);
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 3.2vw, 3.25rem);
+}
+
+/* ---------- Intro bar ---------- */
+
+.roster-header {
+    position: relative;
+    max-width: 1440px;
+    margin: clamp(0.75rem, 1.8vw, 1.5rem) auto clamp(1.75rem, 3.2vw, 3rem);
+    padding-inline: clamp(0.5rem, 1.5vw, 1.25rem);
+}
+
+.roster-header__paper {
+    inset: 0 clamp(0.5rem, 1.5vw, 1.25rem);
+    background-color: #eee6da;
+    background-image: url('/assets/krb/textures/paper-cream.webp');
+    background-blend-mode: multiply;
+    background-size: 420px;
+}
+
+.roster-header__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.4vw, 2.25rem);
+    padding: clamp(1.6rem, 2.6vw, 2.5rem) clamp(1.5rem, 6vw, 6rem);
+}
+
+.roster-header__title {
+    margin: 0;
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    /* ≈ 50px @1280 · 53px @1440 · 62px @1920 */
+    font-size: clamp(2.25rem, 1.9vw + 1.6rem, 3.9rem);
+    font-stretch: 92%;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.roster-header__highlight {
+    position: relative;
+    display: inline-block;
+    color: var(--krb-primary);
+}
+
+.roster-header__crown {
+    position: absolute;
+    top: -0.82em;
+    left: 14%;
+    width: 0.85em;
+    rotate: -6deg;
+}
+
+.roster-header__underline {
+    position: absolute;
+    bottom: -0.3em;
+    left: -22%;
+    width: 1.7em;
+}
+
+.roster-header__divider {
+    flex: none;
+    width: 2px;
+    height: clamp(2.6rem, 3.5vw, 3.5rem);
+    background-color: var(--krb-ink);
+}
+
+.roster-header__text {
+    max-width: 23rem;
+    margin: 0;
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    font-size: clamp(0.95rem, 0.35vw + 0.75rem, 1.2rem);
+    font-stretch: 100%;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.roster-header__strokes {
+    flex: none;
+    width: clamp(3.75rem, 6.5vw, 6.25rem);
+    height: clamp(1.25rem, 1.6vw, 1.6rem);
+    margin-left: auto;
+    background: repeating-linear-gradient(
+        -60deg,
+        var(--krb-primary) 0 0.42rem,
+        transparent 0.42rem 0.95rem
+    );
+}
+
+/* ---------- Grids ---------- */
+
+.roster-grid {
+    display: grid;
+    align-items: end;
+    gap: clamp(1rem, 1.9vw, 1.9rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.roster-grid--featured {
+    grid-template-columns: 1.22fr 1fr 1fr 1fr;
+}
+
+.roster-grid--mixed {
+    grid-template-columns: 1.12fr 1fr 0.78fr 0.78fr 0.78fr 0.82fr;
+}
+
+.roster-grid--compact {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+/* Small hand-placed tilts (inherited by the card) */
+.roster-grid--featured > :nth-child(4n + 1) { --card-r: -1.4deg; }
+.roster-grid--featured > :nth-child(4n + 2) { --card-r: 1deg; }
+.roster-grid--featured > :nth-child(4n + 3) { --card-r: -0.8deg; }
+.roster-grid--featured > :nth-child(4n + 4) { --card-r: 1.5deg; }
+.roster-grid--mixed > :nth-child(odd)       { --card-r: 1.2deg; }
+.roster-grid--mixed > :nth-child(even)      { --card-r: -1.3deg; }
+.roster-grid--compact > :nth-child(3n + 1)  { --card-r: -1deg; }
+.roster-grid--compact > :nth-child(3n + 2)  { --card-r: 0.9deg; }
+.roster-grid--compact > :nth-child(3n + 3)  { --card-r: -0.5deg; }
+
+/* ---------- Member card ---------- */
+
+.member-card {
+    position: relative;
+    padding: clamp(0.4rem, 0.6vw, 0.6rem) clamp(0.4rem, 0.6vw, 0.6rem) clamp(0.75rem, 1vw, 1rem);
+    rotate: var(--card-r, 0deg);
+    filter: drop-shadow(0 6px 10px rgb(23 24 29 / 0.16));
+    transition:
+        translate 0.25s ease,
+        rotate 0.25s ease,
+        filter 0.25s ease;
+}
+
+.member-card:hover {
+    translate: 0 -6px;
+    rotate: calc(var(--card-r, 0deg) * 0.25);
+    filter: drop-shadow(0 14px 18px rgb(23 24 29 / 0.24));
+}
+
+.member-card__paper {
+    position: absolute;
+    inset: 0;
+    background-color: #fdfaf5;
+    clip-path: var(--frame-clip);
+}
+
+.member-card__photo {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 1 / 0.98;
+    overflow: hidden;
+}
+
+.member-card__burst {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+}
+
+/* Head-and-shoulders framing like the posters: anchored just above the
+   head (cutouts start at the hair) and enlarged downwards, so the head is
+   never cropped and the straight bottom cut stays hidden. */
+.member-card__portrait {
+    position: absolute;
+    top: 6%;
+    left: 50%;
+    width: auto;
+    max-width: none;
+    height: 158%;
+    translate: -50% 0;
+}
+
+.member-card__placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+}
+
+.member-card__placeholder > span {
+    padding: 0.2em 0.7em;
+    border-radius: 9999px;
+    background-color: rgb(255 255 255 / 0.88);
+    color: var(--krb-ink);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* Info strip with a torn top edge, overlapping the photo's straight cut */
+.member-card__info {
+    position: relative;
+    z-index: 2;
+    margin-top: -0.85rem;
+    padding: 0.95rem 0.35rem 0.1rem;
+    background-color: #fdfaf5;
+    clip-path: polygon(0 12%, 5% 4%, 9% 10%, 14% 2%, 19% 8%, 25% 3%, 31% 11%, 37% 4%, 43% 9%, 49% 1%, 55% 8%, 61% 3%, 67% 10%, 73% 4%, 79% 9%, 85% 2%, 91% 8%, 96% 3%, 100% 9%, 100% 100%, 0 100%);
+    text-align: center;
+}
+
+.member-card__name {
+    position: relative;
+    margin: 0;
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    /* ≈ 27px @1280 · 29px @1440 · 30px @1920 */
+    font-size: clamp(1.3rem, 0.9vw + 0.85rem, 1.9rem);
+    font-stretch: 88%;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+}
+
+.member-card__nickname {
+    position: relative;
+    margin: 0.25rem 0 0;
+    color: var(--krb-ink);
+    font-family: var(--font-headline);
+    font-size: clamp(0.8rem, 0.3vw + 0.62rem, 1rem);
+    font-stretch: 92%;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.member-card__realname {
+    position: relative;
+    margin: 0.35rem 0 0;
+    color: #3b3c43;
+    font-size: clamp(0.68rem, 0.2vw + 0.55rem, 0.84rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+}
+
+/* First card: a touch more presence (layout emphasis only, not a rank) */
+.member-card--emphasis .member-card__name {
+    font-size: clamp(1.55rem, 1.2vw + 1rem, 2.35rem);
+}
+
+.member-card__name-brush {
+    position: absolute;
+    top: 0.55rem;
+    left: 2%;
+    width: 96%;
+    height: 2.1em;
+    font-size: clamp(1.55rem, 1.2vw + 1rem, 2.35rem);
+    rotate: -3deg;
+}
+
+/* Decorations */
+.member-card__crown {
+    position: absolute;
+    top: -1.35rem;
+    left: -0.9rem;
+    z-index: 3;
+    width: clamp(2.5rem, 3.4vw, 3.5rem);
+    rotate: -16deg;
+}
+
+.member-card__accent {
+    position: absolute;
+    top: -1.2rem;
+    right: -0.7rem;
+    z-index: 3;
+    width: clamp(1.9rem, 2.5vw, 2.6rem);
+    rotate: 20deg;
+}
+
+.member-card__tape {
+    position: absolute;
+    top: -0.75rem;
+    left: 50%;
+    z-index: 3;
+    width: 40%;
+    height: clamp(1.1rem, 1.4vw, 1.5rem);
+    translate: -50% 0;
+    rotate: -4deg;
+}
+
+.member-card__tape > img {
+    filter: saturate(1.6) brightness(0.92);
+}
+
+/* Standard: same poster card, slightly taller photo */
+.member-card--standard .member-card__photo {
+    aspect-ratio: 1 / 1.08;
+}
+
+/* Compact: grayscale cutout with a yellow sticker outline, colour on hover */
+.member-card--compact .member-card__photo {
+    aspect-ratio: 1 / 1.12;
+}
+
+.member-card--compact .member-card__portrait {
+    top: 5%;
+    height: 132%;
+    filter: grayscale(1) drop-shadow(3px 0 0 var(--krb-yellow)) drop-shadow(-3px 0 0 var(--krb-yellow))
+        drop-shadow(0 3px 0 var(--krb-yellow)) drop-shadow(0 -3px 0 var(--krb-yellow));
+    transition: filter 0.3s ease;
+}
+
+.member-card--compact:hover .member-card__portrait {
+    filter: grayscale(0) drop-shadow(3px 0 0 var(--krb-yellow)) drop-shadow(-3px 0 0 var(--krb-yellow))
+        drop-shadow(0 3px 0 var(--krb-yellow)) drop-shadow(0 -3px 0 var(--krb-yellow));
+}
+
+.member-card--compact .member-card__name {
+    font-size: clamp(1.05rem, 0.55vw + 0.75rem, 1.45rem);
+}
+
+.member-card--compact .member-card__nickname {
+    font-size: clamp(0.72rem, 0.22vw + 0.58rem, 0.9rem);
+}
+
+/* ---------- "+ Masih Banyak EL Lainnya!" ---------- */
+
+.roster-more {
+    position: relative;
+    display: grid;
+    align-self: stretch;
+    place-content: center;
+    min-height: 12rem;
+    padding: 1.5rem 1rem;
+    rotate: -2deg;
+}
+
+.roster-more__paper {
+    inset: 0;
+    background-color: var(--krb-primary);
+}
+
+.roster-more__text {
+    position: relative;
+    display: grid;
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-headline);
+    font-size: clamp(1.35rem, 1.2vw + 0.8rem, 2.1rem);
+    font-stretch: 85%;
+    font-style: italic;
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+}
+
+.roster-more__scribble {
+    position: relative;
+    justify-self: center;
+    width: 70%;
+    margin-top: 0.6rem;
+}
+
+.roster-more__accent {
+    position: absolute;
+    top: -1.4rem;
+    right: 0.5rem;
+    width: clamp(2rem, 2.6vw, 2.75rem);
+    rotate: 10deg;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1023.98px) {
+    .roster-header__inner {
+        padding-inline: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    .roster-grid--featured {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 2.25rem;
+    }
+
+    .roster-grid--mixed {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        row-gap: 2rem;
+    }
+
+    .roster-grid__item--standard {
+        grid-column: span 2;
+    }
+
+    .roster-grid--compact {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        row-gap: 2rem;
+    }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 639.98px) {
+    .roster-header__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.85rem;
+        padding: 2rem 1.5rem 1.75rem;
+    }
+
+    .roster-header__title {
+        font-size: clamp(2.2rem, 11vw, 2.8rem);
+    }
+
+    .roster-header__divider {
+        display: none;
+    }
+
+    .roster-header__strokes {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
+        width: 3.25rem;
+        height: 1rem;
+    }
+
+    .roster-grid {
+        gap: 1.6rem 0.85rem;
+    }
+
+    .roster-grid--mixed {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .roster-grid__item--standard {
+        grid-column: span 3;
+    }
+
+    .roster-grid--mixed > .roster-grid__item--compact {
+        grid-column: span 2;
+    }
+
+    .roster-more {
+        grid-column: 1 / -1;
+        min-height: 0;
+        padding: 1.25rem 1rem;
+        rotate: -1deg;
+    }
+
+    .roster-more__text {
+        display: block;
+    }
+
+    .roster-more__text > span + span::before {
+        content: ' ';
+    }
+
+    .roster-grid--compact {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .member-card__name {
+        font-size: 1.15rem;
+    }
+
+    .member-card--emphasis .member-card__name,
+    .member-card__name-brush {
+        font-size: 1.3rem;
+    }
+
+    .member-card--compact .member-card__name {
+        font-size: 0.98rem;
+    }
+
+    .member-card__nickname,
+    .member-card--compact .member-card__nickname {
+        font-size: 0.74rem;
+    }
+
+    .member-card__realname {
+        font-size: 0.62rem;
+        letter-spacing: 0.03em;
+    }
+
+    .member-card--compact .member-card__portrait {
+        filter: grayscale(1) drop-shadow(2px 0 0 var(--krb-yellow)) drop-shadow(-2px 0 0 var(--krb-yellow))
+            drop-shadow(0 2px 0 var(--krb-yellow)) drop-shadow(0 -2px 0 var(--krb-yellow));
+    }
+}
