@@ -1,6 +1,8 @@
+import { useRef } from 'react';
 import ScrapPhoto from '@/components/scrapbook/ScrapPhoto';
 import DecorativeElement from '@/components/scrapbook/DecorativeElement';
 import { heroCopy, heroDecor, heroPhotos } from '@/data/homeHero';
+import { useHeroEntrance } from '@/hooks/useHeroEntrance';
 
 /**
  * Home Hero — scrapbook collage.
@@ -10,8 +12,12 @@ import { heroCopy, heroDecor, heroPhotos } from '@/data/homeHero';
  * composition scales as one piece; phones get their own arrangement.
  */
 export default function HomeHero() {
+    const heroRef = useRef(null);
+
+    useHeroEntrance(heroRef);
+
     return (
-        <section className="home-hero" aria-labelledby="home-hero-title">
+        <section ref={heroRef} className="home-hero" aria-labelledby="home-hero-title">
             <div className="home-hero__inner">
                 <div className="home-hero__stage">
                     {/* Back layer: patterns behind the photos */}

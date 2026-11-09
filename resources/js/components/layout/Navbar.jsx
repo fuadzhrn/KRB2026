@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import KrbLogo from '@/components/layout/KrbLogo';
 import { mainNavigation, primaryCallToAction } from '@/data/navigation';
 import { krbAssets } from '@/data/krbAssets';
+import { useNavbarEntrance } from '@/hooks/useNavbarEntrance';
 
 /** Real page URL once the route exists, otherwise the temporary Home section. */
 function resolveNavigation(availableRoutes, currentPath) {
@@ -21,6 +22,9 @@ export default function Navbar() {
     const menuId = useId();
     const menuButtonRef = useRef(null);
     const firstMenuLinkRef = useRef(null);
+    const headerRef = useRef(null);
+
+    useNavbarEntrance(headerRef);
 
     const currentPath = url.split(/[?#]/)[0] || '/';
     const navigation = resolveNavigation(props.availableRoutes ?? [], currentPath);
@@ -57,7 +61,7 @@ export default function Navbar() {
     const closeMenu = () => setIsMenuOpen(false);
 
     return (
-        <header className="krb-navbar">
+        <header ref={headerRef} className="krb-navbar">
             <nav className="krb-navbar__bar" aria-label="Navigasi utama">
                 <Link href="/" className="krb-navbar__logo" aria-label="KRB, ke beranda">
                     <KrbLogo />
